@@ -18,7 +18,7 @@
                         @if($post->featured_image)
                             <div class="w-full md:w-48 shrink-0">
                                 <a href="{{ route('blog.show', $post) }}">
-                                    <img src="{{ asset('storage/' . $post->featured_image) }}" alt=""
+                                    <img src="{{ Storage::url($post->featured_image) }}" alt=""
                                         class="w-full h-32 object-cover border border-gray-800 rounded group-hover:border-green-500/50 transition-colors">
                                 </a>
                             </div>

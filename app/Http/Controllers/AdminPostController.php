@@ -33,7 +33,7 @@ class AdminPostController extends Controller
         $validated['slug'] = Str::slug($validated['title']);
 
         if ($request->hasFile('featured_image')) {
-            $path = $request->file('featured_image')->store('posts', 'public');
+            $path = $request->file('featured_image')->store('posts');
             $validated['featured_image'] = $path;
         }
 
@@ -64,9 +64,9 @@ class AdminPostController extends Controller
         if ($request->hasFile('featured_image')) {
             // Delete old image
             if ($post->featured_image) {
-                Storage::disk('public')->delete($post->featured_image);
+                Storage::delete($post->featured_image);
             }
-            $path = $request->file('featured_image')->store('posts', 'public');
+            $path = $request->file('featured_image')->store('posts');
             $validated['featured_image'] = $path;
         }
 
@@ -78,7 +78,7 @@ class AdminPostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->featured_image) {
-            Storage::disk('public')->delete($post->featured_image);
+            Storage::delete($post->featured_image);
         }
 
         $post->delete();

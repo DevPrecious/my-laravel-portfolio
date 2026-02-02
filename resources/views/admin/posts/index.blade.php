@@ -41,7 +41,7 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if($post->featured_image)
-                                            <img src="{{ asset('storage/' . $post->featured_image) }}" alt=""
+                                            <img src="{{ Storage::url($post->featured_image) }}" alt=""
                                                 class="h-10 w-10 rounded-lg object-cover">
                                         @else
                                             <div class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">

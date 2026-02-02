@@ -81,7 +81,7 @@
                                 <p class="mt-1 text-sm text-gray-500">Click to change featured image</p>
                             </div>
                             <img id="image-preview"
-                                src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : '#' }}"
+                                src="{{ $post->featured_image ? Storage::url($post->featured_image) : '#' }}"
                                 alt="Preview" class="{{ $post->featured_image ? '' : 'hidden' }}">
                         </div>
                         <x-input-error class="mt-2" :messages="$errors->get('featured_image')" />
