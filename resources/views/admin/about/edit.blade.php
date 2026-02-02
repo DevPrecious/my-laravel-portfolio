@@ -7,13 +7,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
-            {{-- Success Message --}}
-            @if (session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                    <span class="block sm:inline">{{ session('success') }}</span>
-                </div>
-            @endif
 
             {{-- Edit Bio --}}
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
@@ -34,7 +27,9 @@
 
                             <div>
                                 <x-input-label for="bio" :value="__('Bio (HTML allowed)')" />
-                                <textarea id="bio" name="bio" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="10" required>{{ old('bio', $about->bio ?? '') }}</textarea>
+                                <textarea id="bio" name="bio"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    rows="10" required>{{ old('bio', $about->bio ?? '') }}</textarea>
                                 <x-input-error class="mt-2" :messages="$errors->get('bio')" />
                             </div>
 
@@ -65,7 +60,8 @@
                             <div>
                                 <x-input-label for="name" :value="__('New Skill')" />
                                 <div class="flex gap-2">
-                                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required />
+                                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
+                                        required />
                                     <x-primary-button class="mt-1">{{ __('Add') }}</x-primary-button>
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -78,10 +74,12 @@
                                 @foreach($skills as $skill)
                                     <li class="py-4 flex justify-between items-center">
                                         <span class="text-gray-800">{{ $skill->name }}</span>
-                                        <form method="post" action="{{ route('admin.skills.destroy', $skill) }}" onsubmit="return confirm('Are you sure?');">
+                                        <form method="post" action="{{ route('admin.skills.destroy', $skill) }}"
+                                            onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">
+                                            <button type="submit"
+                                                class="text-red-600 hover:text-red-900 text-sm font-medium">
                                                 {{ __('Delete') }}
                                             </button>
                                         </form>
@@ -117,19 +115,23 @@
 
                             <div>
                                 <x-input-label for="company" :value="__('Company')" />
-                                <x-text-input id="company" name="company" type="text" class="mt-1 block w-full" required />
+                                <x-text-input id="company" name="company" type="text" class="mt-1 block w-full"
+                                    required />
                                 <x-input-error class="mt-2" :messages="$errors->get('company')" />
                             </div>
 
                             <div>
                                 <x-input-label for="period" :value="__('Period')" />
-                                <x-text-input id="period" name="period" type="text" class="mt-1 block w-full" placeholder="e.g. 2023 - Present" required />
+                                <x-text-input id="period" name="period" type="text" class="mt-1 block w-full"
+                                    placeholder="e.g. 2023 - Present" required />
                                 <x-input-error class="mt-2" :messages="$errors->get('period')" />
                             </div>
 
                             <div>
                                 <x-input-label for="description" :value="__('Description (HTML allowed)')" />
-                                <textarea id="description" name="description" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="4"></textarea>
+                                <textarea id="description" name="description"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    rows="4"></textarea>
                                 <x-input-error class="mt-2" :messages="$errors->get('description')" />
                             </div>
 
@@ -146,12 +148,16 @@
                                         <div class="flex justify-between items-start">
                                             <div>
                                                 <h4 class="text-gray-900 font-bold">{{ $experience->role }}</h4>
-                                                <p class="text-gray-600 text-sm">{{ $experience->company }} | {{ $experience->period }}</p>
+                                                <p class="text-gray-600 text-sm">{{ $experience->company }} |
+                                                    {{ $experience->period }}</p>
                                             </div>
-                                            <form method="post" action="{{ route('admin.experiences.destroy', $experience) }}" onsubmit="return confirm('Are you sure?');">
+                                            <form method="post"
+                                                action="{{ route('admin.experiences.destroy', $experience) }}"
+                                                onsubmit="return confirm('Are you sure?');">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">
+                                                <button type="submit"
+                                                    class="text-red-600 hover:text-red-900 text-sm font-medium">
                                                     {{ __('Delete') }}
                                                 </button>
                                             </form>

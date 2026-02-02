@@ -14,25 +14,38 @@
         <div class="space-y-8">
             @forelse($posts as $post)
                 <article class="border border-gray-800 bg-black/50 p-6 hover:border-green-500/50 transition-colors group">
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                        <div>
-                            <h2 class="text-xl font-bold text-green-400 group-hover:text-green-300">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        @if($post->featured_image)
+                            <div class="w-full md:w-48 shrink-0">
                                 <a href="{{ route('blog.show', $post) }}">
-                                    {{ $post->title }}
+                                    <img src="{{ asset('storage/' . $post->featured_image) }}" alt=""
+                                        class="w-full h-32 object-cover border border-gray-800 rounded group-hover:border-green-500/50 transition-colors">
                                 </a>
-                            </h2>
-                            <div class="flex items-center gap-4 mt-2 text-xs text-gray-500">
-                                <span><span class="text-blue-500">@</span>devprecious</span>
-                                <span>{{ $post->published_at->format('M d, Y') }}</span>
+                            </div>
+                        @endif
+                        <div class="flex-grow">
+                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                                <div>
+                                    <h2 class="text-xl font-bold text-green-400 group-hover:text-green-300">
+                                        <a href="{{ route('blog.show', $post) }}">
+                                            {!! $post->rendered_title !!}
+                                        </a>
+                                    </h2>
+                                    <div class="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                                        <span><span class="text-blue-500">@</span>devprecious</span>
+                                        <span>{{ $post->published_at->format('M d, Y') }}</span>
+                                    </div>
+                                </div>
+                                <a href="{{ route('blog.show', $post) }}"
+                                    class="text-xs border border-gray-700 px-3 py-1 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                                    READ_FILE
+                                </a>
+                            </div>
+
+                            <div class="text-gray-400 text-sm leading-relaxed mb-4 prose prose-invert prose-sm max-w-none">
+                                {!! $post->rendered_excerpt !!}
                             </div>
                         </div>
-                        <a href="{{ route('blog.show', $post) }}" class="text-xs border border-gray-700 px-3 py-1 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
-                            READ_FILE
-                        </a>
-                    </div>
-                    
-                    <div class="text-gray-400 text-sm leading-relaxed mb-4">
-                        {{ $post->excerpt }}
                     </div>
                 </article>
             @empty
